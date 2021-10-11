@@ -2,6 +2,8 @@ package tests;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import pageObjects.HomePage;
+import pageObjects.LoginPage;
 import utils.Browser;
 import utils.Utils;
 
@@ -17,14 +19,19 @@ public class SetupTest extends BaseTests{
 
     @Test
     public void testLogin(){
-        Browser.getCurrentDriver().findElement(By.className("login")).click();
+        HomePage home = new HomePage();
+        LoginPage login = new LoginPage();
+
+        home.clickBtnLogin();
         System.out.println("Click login");
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoginPageURL()));
-        Browser.getCurrentDriver().findElement(By.id("email")).sendKeys("gustavoullmann@gmail.com");
+
+        login.fillEmail();
         System.out.println("Inseriu e-mail");
-        Browser.getCurrentDriver().findElement(By.id("passwd")).sendKeys("12345");
+        login.fillPasswd();
         System.out.println("Inseriu senha");
-        Browser.getCurrentDriver().findElement(By.id("SubmitLogin")).click();
+        login.clickBtnSubmitLogin();
+
         System.out.println("Click sign in");
         assertTrue((Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoggedUserPageURL())));
         System.out.println("Logado com sucesso");
