@@ -33,7 +33,7 @@ public class SetupTest extends BaseTests{
         login.clickBtnSubmitLogin();
 
         System.out.println("Click sign in");
-        assertTrue((Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoggedUserPageURL())));
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoggedUserPageURL()));
         System.out.println("Logado com sucesso");
         assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("MY ACCOUNT"));
         System.out.println("Pagina de usuário carregada com sucesso");
