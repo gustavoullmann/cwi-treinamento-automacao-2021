@@ -1,2 +1,4 @@
-package pageObjects;public class MyAccountPage {
+package pageObjects;
+
+public class MyAccountPage {
 }
