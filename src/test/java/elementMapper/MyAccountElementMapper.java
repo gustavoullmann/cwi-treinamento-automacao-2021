@@ -1,2 +1,5 @@
-package elementMapper;public class MyAccountElementMapper {
+package elementMapper;
+
+public class MyAccountElementMapper {
+
 }
