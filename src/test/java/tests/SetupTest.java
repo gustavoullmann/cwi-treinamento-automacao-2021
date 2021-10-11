@@ -38,4 +38,15 @@ public class SetupTest extends BaseTests{
         assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("MY ACCOUNT"));
         System.out.println("Pagina de usuário carregada com sucesso");
     }
+
+    @Test
+    public void testSearchProduct(){
+        HomePage home = new HomePage();
+
+        home.fillSearch();
+        System.out.println("preencheu busca por dress");
+        home.clickSearchBtn();
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getSearchByDressPageURL()));
+        System.out.println("executou a busca por 'dress'");
+    }
 }
