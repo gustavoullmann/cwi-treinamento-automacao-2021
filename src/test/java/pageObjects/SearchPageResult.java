@@ -4,9 +4,9 @@ import elementMapper.SearchPageResultElementMapper;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 
-public class SearchPageResultPage extends SearchPageResultElementMapper {
+public class SearchPageResult extends SearchPageResultElementMapper {
 
-    public SearchPageResultPage(){
+    public SearchPageResult(){
         PageFactory.initElements(Browser.getCurrentDriver(), this);
     }
 
