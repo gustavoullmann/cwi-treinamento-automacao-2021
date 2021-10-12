@@ -1,13 +1,17 @@
 package tests;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
+import pageObjects.SearchPageResult;
 import utils.Browser;
 import utils.Utils;
 
-import static org.junit.Assert.assertTrue;
+import java.math.MathContext;
+
+import static org.junit.Assert.*;
 
 public class SetupTest extends BaseTests{
 
@@ -42,11 +46,22 @@ public class SetupTest extends BaseTests{
     @Test
     public void testSearchProduct(){
         HomePage home = new HomePage();
+        SearchPageResult search = new SearchPageResult();
 
-        home.fillSearch();
-        System.out.println("preencheu busca por dress");
+        String keys = "DRESS";
+        String resultCounter = "7";
+
+        home.fillSearch(keys);
+        System.out.println("preencheu busca");
+
         home.clickSearchBtn();
-        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getSearchByDressPageURL()));
-        System.out.println("executou a busca por 'dress'");
+        assertTrue(search.isSearchPage());
+        assertEquals(search.getTextLighter().replace("\"",""),keys);
+        assertThat(search.getTextHeadingCounter(), CoreMatchers.containsString(resultCounter));
+
+        System.out.println("executou a busca");
+
+        //TODO Acessar a página do produto que foi pesquisado
+        //TODO Adicionar o produto pesquisado no nosso carrinho
     }
 }
