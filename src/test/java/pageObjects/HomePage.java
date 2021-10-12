@@ -14,8 +14,8 @@ public class HomePage extends HomePageElementMapper {
         login.click();
     }
 
-    public void fillSearch(){
-        search_query_top.sendKeys("dress");
+    public void fillSearch(String keys){
+        search_query_top.sendKeys(keys);
     }
 
     public void clickSearchBtn(){
