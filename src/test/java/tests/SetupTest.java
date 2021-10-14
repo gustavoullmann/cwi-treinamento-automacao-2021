@@ -3,10 +3,7 @@ package tests;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import pageObjects.CategoryPage;
-import pageObjects.HomePage;
-import pageObjects.LoginPage;
-import pageObjects.SearchPageResult;
+import pageObjects.*;
 import utils.Browser;
 import utils.Utils;
 
@@ -70,5 +67,17 @@ public class SetupTest extends BaseTests{
 
         home.clickCategoryTShirts();
         assertTrue(category.isPageTShirts());
+    }
+
+    @Test
+    public void testAddProductToProductPage(){
+
+        testAccessCategoryTShirts();
+
+        CategoryPage category = new CategoryPage();
+        ProductPage pdp = new ProductPage();
+        String nameProductCategory = category.getProductNameCategory();
+        category.clickProductAddToProductPage();
+        assertTrue(pdp.getProductNamePDP().equals(nameProductCategory));
     }
 }
