@@ -21,4 +21,8 @@ public class HomePage extends HomePageElementMapper {
     public void clickSearchBtn(){
         submit_search.click();
     }
+
+    public void clickCategoryTShirts() {
+        menuTshirts.click();
+    }
 }
