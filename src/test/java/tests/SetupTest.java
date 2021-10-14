@@ -78,6 +78,6 @@ public class SetupTest extends BaseTests{
         ProductPage pdp = new ProductPage();
         String nameProductCategory = category.getProductNameCategory();
         category.clickProductAddToProductPage();
-        assertTrue(pdp.getProductNamePDP().equals(nameProductCategory));
+        assertEquals(pdp.getProductNamePDP(), nameProductCategory);
     }
 }
