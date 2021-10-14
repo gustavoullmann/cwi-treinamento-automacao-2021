@@ -3,6 +3,7 @@ package tests;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import pageObjects.CategoryPage;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
 import pageObjects.SearchPageResult;
@@ -60,8 +61,14 @@ public class SetupTest extends BaseTests{
         assertThat(search.getTextHeadingCounter(), CoreMatchers.containsString(resultCounter));
 
         System.out.println("executou a busca");
+    }
 
-        //TODO Acessar a página do produto que foi pesquisado
-        //TODO Adicionar o produto pesquisado no nosso carrinho
+    @Test
+    public void testAccessCategoryTShirts(){
+        HomePage home = new HomePage();
+        CategoryPage category = new CategoryPage();
+
+        home.clickCategoryTShirts();
+        assertTrue(category.isPageTShirts());
     }
 }
