@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -14,21 +16,24 @@ import java.math.MathContext;
 
 import static org.junit.Assert.*;
 
+@Feature("Testes site de ecommerce")
 public class SetupTest extends BaseTests{
 
     @Test
+    @Story("Abrir o site")
     public void testOpeningBrowserAndLoadingPage(){
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseURL()));
         System.out.println("Abrimos o navegador e carregamos a url!");
     }
 
     @Test
+    @Story("Realizar o login")
     public void testLogin(){
         HomePage home = new HomePage();
         LoginPage login = new LoginPage();
 
         home.clickBtnLogin();
-        System.out.println("Click login");
+        System.out.println("Clicou em Sign In e direcionou para a página de login");
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoginPageURL()));
 
         login.fillEmail();
@@ -44,26 +49,27 @@ public class SetupTest extends BaseTests{
         System.out.println("Pagina de usuário carregada com sucesso");
     }
 
+//    @Test
+//    public void testSearchProduct(){
+//        HomePage home = new HomePage();
+//        SearchPageResult search = new SearchPageResult();
+//
+//        String keys = "DRESS";
+//        String resultCounter = "7";
+//
+//        home.fillSearch(keys);
+//        System.out.println("preencheu busca");
+//
+//        home.clickSearchBtn();
+//        assertTrue(search.isSearchPage());
+//        assertEquals(search.getTextLighter().replace("\"",""),keys);
+//        assertThat(search.getTextHeadingCounter(), CoreMatchers.containsString(resultCounter));
+//
+//        System.out.println("executou a busca");
+//    }
+//
     @Test
-    public void testSearchProduct(){
-        HomePage home = new HomePage();
-        SearchPageResult search = new SearchPageResult();
-
-        String keys = "DRESS";
-        String resultCounter = "7";
-
-        home.fillSearch(keys);
-        System.out.println("preencheu busca");
-
-        home.clickSearchBtn();
-        assertTrue(search.isSearchPage());
-        assertEquals(search.getTextLighter().replace("\"",""),keys);
-        assertThat(search.getTextHeadingCounter(), CoreMatchers.containsString(resultCounter));
-
-        System.out.println("executou a busca");
-    }
-
-    @Test
+    @Story("Acessar Categoria")
     public void testAccessCategoryTShirts(){
         HomePage home = new HomePage();
         CategoryPage category = new CategoryPage();
@@ -73,6 +79,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Adicionar página de Produto")
     public void testAddProductToProductPage(){
 
         testAccessCategoryTShirts();
@@ -85,6 +92,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Adicionar Produto ao Carrinho")
     public void testAddProductToCartPage() {
 
         testAddProductToProductPage();
