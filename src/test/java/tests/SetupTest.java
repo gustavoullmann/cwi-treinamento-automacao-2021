@@ -3,6 +3,9 @@ package tests;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.*;
 import utils.Browser;
 import utils.Utils;
@@ -80,4 +83,22 @@ public class SetupTest extends BaseTests{
         category.clickProductAddToProductPage();
         assertEquals(pdp.getProductNamePDP(), nameProductCategory);
     }
+
+    @Test
+    public void testAddProductToCartPage() {
+
+        testAddProductToProductPage();
+
+        ProductPage pdp = new ProductPage();
+        CartPage cart = new CartPage();
+
+        String nameProductPDP = pdp.getProductNamePDP();
+        pdp.ClickButtonAddToCart();
+        WebDriverWait wait = new WebDriverWait(Browser.getCurrentDriver(), 10);
+        wait.until(ExpectedConditions.elementToBeClickable(pdp.clearFix));
+        pdp.clickButtonModalProceedToCheckout();
+        assertEquals(cart.getNameProductCart(), nameProductPDP);
+    }
 }
+
+
