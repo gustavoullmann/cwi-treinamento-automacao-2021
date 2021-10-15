@@ -5,14 +5,11 @@ import io.qameta.allure.Story;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.*;
 import utils.Browser;
 import utils.Utils;
-
-import java.math.MathContext;
 
 import static org.junit.Assert.*;
 
@@ -67,7 +64,7 @@ public class SetupTest extends BaseTests{
 //
 //        System.out.println("executou a busca");
 //    }
-//
+
     @Test
     @Story("Acessar Categoria")
     public void testAccessCategoryTShirts(){
@@ -81,7 +78,6 @@ public class SetupTest extends BaseTests{
     @Test
     @Story("Adicionar página de Produto")
     public void testAddProductToProductPage(){
-
         testAccessCategoryTShirts();
 
         CategoryPage category = new CategoryPage();
@@ -94,7 +90,6 @@ public class SetupTest extends BaseTests{
     @Test
     @Story("Adicionar Produto ao Carrinho")
     public void testAddProductToCartPage() {
-
         testAddProductToProductPage();
 
         ProductPage pdp = new ProductPage();
@@ -108,5 +103,3 @@ public class SetupTest extends BaseTests{
         assertEquals(cart.getNameProductCart(), nameProductPDP);
     }
 }
-
-

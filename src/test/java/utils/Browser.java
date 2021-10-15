@@ -12,7 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.InputMismatchException;
 import java.util.concurrent.TimeUnit;
 
 public class Browser {

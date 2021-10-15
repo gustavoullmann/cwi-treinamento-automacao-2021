@@ -13,5 +13,4 @@ public class CartPage extends CartPageElementMapper {
     public String getNameProductCart() {
         return productNameCart.getText();
     }
-
 }

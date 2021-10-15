@@ -17,14 +17,14 @@ public class HomePage extends HomePageElementMapper {
     }
 
     public void fillSearch(String keys){
-        search_query_top.sendKeys(keys);
+        searchQueryTop.sendKeys(keys);
     }
 
     public void clickSearchBtn(){
-        submit_search.click();
+        submitSearch.click();
     }
 
     public void clickCategoryTShirts() {
-        menuTshirts.click();
+        menuTShirts.click();
     }
 }

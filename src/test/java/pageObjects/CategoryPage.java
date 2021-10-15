@@ -26,6 +26,4 @@ public class CategoryPage extends CategoryPageElementMapper {
     public String getProductNameCategory() {
         return productNameCategory.getText();
     }
-
-
 }

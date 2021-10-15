@@ -9,12 +9,11 @@ public class HomePageElementMapper {
     public WebElement login;
 
     @FindBy(id = "search_query_top")
-    public WebElement search_query_top;
+    public WebElement searchQueryTop;
 
     @FindBy(name = "submit_search")
-    public WebElement submit_search;
+    public WebElement submitSearch;
 
     @FindBy(css = "#block_top_menu .sf-menu li:nth-child(3) a[title=T-shirts]")
-    public WebElement menuTshirts;
-
+    public WebElement menuTShirts;
 }

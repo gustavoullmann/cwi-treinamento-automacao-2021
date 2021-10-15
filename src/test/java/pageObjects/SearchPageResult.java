@@ -11,7 +11,7 @@ public class SearchPageResult extends SearchPageResultElementMapper {
     }
 
     public String getTextNavigationPage(){
-        return navigation_page.getText();
+        return navigationPage.getText();
     }
 
     public String getTextLighter(){
@@ -19,7 +19,7 @@ public class SearchPageResult extends SearchPageResultElementMapper {
     }
 
     public String getTextHeadingCounter(){
-        return heading_counter.getText();
+        return headingCounter.getText();
     }
 
     public boolean isSearchPage(){
