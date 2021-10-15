@@ -103,3 +103,5 @@ public class SetupTest extends BaseTests{
         assertEquals(cart.getNameProductCart(), nameProductPDP);
     }
 }
+
+//teste new branch
