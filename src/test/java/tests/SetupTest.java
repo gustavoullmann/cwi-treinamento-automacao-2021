@@ -1,6 +1,7 @@
 package tests;
 
 import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -31,63 +32,61 @@ public class SetupTest extends BaseTests{
         LoginPage loginPage = new LoginPage();
 
         homePage.clickBtnLogin();
-        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoginPageURL()));
-        System.out.println("Abrimos o navegador e carregamos a url da página de login!");
-
         loginPage.fillAccountCreationEmail();
-        System.out.println("Preencheu o campo de e-mail");
         loginPage.createAnAccountClickButton();
-        System.out.println("Clicou em Create an account");
-
         WebDriverWait wait = new WebDriverWait(Browser.getCurrentDriver(), 10);
         wait.until(ExpectedConditions.urlContains("#account-creation"));
 
-        assertEquals(Browser.getCurrentDriver().getCurrentUrl(), Utils.getAccountCreationURL());
-        System.out.println("Confirmou a URL");
+        assertTrue(loginPage.isAccountCreationPage());
     }
 
-//    @Test
-//    @Story("Realizar o login")
-//    public void testLogin() {
-//        HomePage home = new HomePage();
-//        LoginPage login = new LoginPage();
-//
-//        home.clickBtnLogin();
-//        System.out.println("Clicou em Sign In e direcionou para a página de login");
-//        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoginPageURL()));
-//
-//        login.fillEmail();
-//        System.out.println("Inseriu e-mail");
-//        login.fillPasswd();
-//        System.out.println("Inseriu senha");
-//        login.clickBtnSubmitLogin();
-//
-//        System.out.println("Click sign in");
-//        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoggedUserPageURL()));
-//        System.out.println("Logado com sucesso");
-//        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("MY ACCOUNT"));
-//        System.out.println("Pagina de usuário carregada com sucesso");
-//    }
-//
-//    @Test
-//    public void testSearchProduct() {
-//        HomePage home = new HomePage();
-//        SearchPageResult search = new SearchPageResult();
-//
-//        String keys = "DRESS";
-//        String resultCounter = "7";
-//
-//        home.fillSearch(keys);
-//        System.out.println("preencheu busca");
-//
-//        home.clickSearchBtn();
-//        assertTrue(search.isSearchPage());
-//        assertEquals(search.getTextLighter().replace("\"",""),keys);
-//        assertThat(search.getTextHeadingCounter(), CoreMatchers.containsString(resultCounter));
-//
-//        System.out.println("executou a busca");
-//    }
-//
+    @Test
+    @Story("Preencher cadastro de novo usuário")
+    public void testFillAccountCreationForm() {
+        testLoadAccountCreation();
+        AccountCreationPage accountCreationPage = new AccountCreationPage();
+
+        accountCreationPage.fillFirstName();
+        accountCreationPage.fillLastName();
+        accountCreationPage.fillPassword();
+        accountCreationPage.fillAddress1();
+        accountCreationPage.fillCity();
+        accountCreationPage.selectState();
+        accountCreationPage.fillPostCode();
+        accountCreationPage.fillPhoneMobile();
+        accountCreationPage.clickSubmitAccountButton();
+
+        assertTrue(accountCreationPage.isNewUserPage());
+    }
+
+    @Test
+    @Story("Realizar o login")
+    public void testLogin() {
+        HomePage home = new HomePage();
+        LoginPage login = new LoginPage();
+
+        home.clickBtnLogin();
+        WebDriverWait wait = new WebDriverWait(Browser.getCurrentDriver(), 10);
+        wait.until(ExpectedConditions.elementToBeClickable(login.submitLogin));
+        login.fillEmail();
+        login.fillPasswd();
+        login.clickBtnSubmitLogin();
+
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoggedUserPageURL()));
+    }
+
+    @Test
+    @Story("Realizar uma pesquisa de produto")
+    public void testSearchProduct() {
+        testLogin();
+        MyAccountPage myAccountPage = new MyAccountPage();
+
+        String keys = "DRESS";
+
+        myAccountPage.fillSearch(keys);
+        myAccountPage.clickSubmitSearchButton();
+    }
+
 //    @Test
 //    @Story("Acessar Categoria")
 //    public void testAccessCategoryTShirts() {
@@ -97,32 +96,39 @@ public class SetupTest extends BaseTests{
 //        home.clickCategoryTShirts();
 //        assertTrue(category.isPageTShirts());
 //    }
-//
-//    @Test
-//    @Story("Adicionar página de Produto")
-//    public void testAddProductToProductPage() {
-//        testAccessCategoryTShirts();
-//
-//        CategoryPage category = new CategoryPage();
-//        ProductPage pdp = new ProductPage();
-//        String nameProductCategory = category.getProductNameCategory();
-//        category.clickProductAddToProductPage();
-//        assertEquals(pdp.getProductNamePDP(), nameProductCategory);
-//    }
-//
-//    @Test
-//    @Story("Adicionar Produto ao Carrinho")
-//    public void testAddProductToCartPage() {
-//        testAddProductToProductPage();
-//
-//        ProductPage pdp = new ProductPage();
-//        CartPage cart = new CartPage();
-//
-//        String nameProductPDP = pdp.getProductNamePDP();
-//        pdp.ClickButtonAddToCart();
-//        WebDriverWait wait = new WebDriverWait(Browser.getCurrentDriver(), 10);
-//        wait.until(ExpectedConditions.elementToBeClickable(pdp.clearFix));
-//        pdp.clickButtonModalProceedToCheckout();
-//        assertEquals(cart.getNameProductCart(), nameProductPDP);
-//    }
+
+    @Test
+    @Story("Adicionar página de Produto")
+    public void testAddProductToProductPage() {
+        testSearchProduct();
+        SearchPageResult searchPageResult = new SearchPageResult();
+
+        searchPageResult.clickProductAddToProductPage();
+    }
+
+    @Test
+    @Story("Adicionar Produto ao Carrinho")
+    public void testAddProductToCartPage() {
+        testAddProductToProductPage();
+        ProductPage productPage = new ProductPage();
+
+        productPage.ClickButtonAddToCart();
+        WebDriverWait wait = new WebDriverWait(Browser.getCurrentDriver(), 10);
+        wait.until(ExpectedConditions.elementToBeClickable(productPage.clearFix));
+        productPage.clickButtonModalProceedToCheckout();
+    }
+
+    @Test
+    @Story("Finalizar uma compra")
+    public void completeOrder() {
+        testAddProductToCartPage();
+        OrderPage orderPage = new OrderPage();
+
+        orderPage.clickProceedToCheckoutButton();
+        orderPage.clickProceedToCheckoutButtonStep1();
+        orderPage.clickAgreeToTheTermsServiceCheckBox();
+        orderPage.clickProceedToCheckoutButtonStep2();
+        orderPage.clickpayByBankWirePaymentOption();
+        orderPage.clickIConfirmMyOrderButton();
+    }
 }
