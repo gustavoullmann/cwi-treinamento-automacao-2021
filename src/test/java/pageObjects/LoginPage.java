@@ -4,6 +4,7 @@ import elementMapper.LoginPageElementMapper;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
+import utils.Utils;
 
 import java.util.Random;
 
@@ -31,11 +32,16 @@ public class LoginPage extends LoginPageElementMapper {
     @Step("Preencheu email de criação de cadastro")
     public void fillAccountCreationEmail() {
         int randomInt = new Random().nextInt(10000) + 1;
-        createAccountEmail.sendKeys("teste" + String.valueOf(randomInt) + "@mail.com");
+        createAccountEmail.sendKeys("testeGustavo" + String.valueOf(randomInt) + "@mail.com");
     }
 
     @Step("Clicou em Create an account")
     public void createAnAccountClickButton() {
         createAnAccountButton.click();
+    }
+
+    @Step("Confirmou que está na página de criação de cadastro")
+    public boolean isAccountCreationPage() {
+        return Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getAccountCreationURL());
     }
 }
