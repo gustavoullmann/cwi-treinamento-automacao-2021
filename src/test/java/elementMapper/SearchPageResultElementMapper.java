@@ -13,4 +13,10 @@ public class SearchPageResultElementMapper {
 
     @FindBy(className = "heading-counter")
     public WebElement headingCounter;
+
+    @FindBy(css = ".product_list .product-name")
+    public WebElement product;
+
+    @FindBy(css = ".button[title=View]")
+    public WebElement buttonMoreAddToProductPage;
 }
