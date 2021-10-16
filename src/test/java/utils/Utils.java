@@ -21,4 +21,8 @@ public class Utils {
     public static String getSearchByDressPageURL() {
         return "http://automationpractice.com/index.php?controller=search&orderby=position&orderway=desc&search_query=dress&submit_search=";
     }
+
+    public static String getNewUserURL() {
+        return "http://automationpractice.com/index.php?controller=my-account";
+    }
 }
