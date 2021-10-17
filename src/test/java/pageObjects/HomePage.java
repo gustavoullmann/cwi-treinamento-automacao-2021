@@ -4,6 +4,7 @@ import elementMapper.HomePageElementMapper;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
+import utils.Utils;
 
 public class HomePage extends HomePageElementMapper {
 
@@ -12,19 +13,12 @@ public class HomePage extends HomePageElementMapper {
     }
 
     @Step("Clicou em Sign In e direcionou para a página de login")
-    public void clickBtnLogin(){
+    public void clickLoginButton(){
         login.click();
     }
 
-    public void fillSearch(String keys){
-        searchQueryTop.sendKeys(keys);
-    }
-
-    public void clickSearchBtn(){
-        submitSearch.click();
-    }
-
-    public void clickCategoryTShirts() {
-        menuTShirts.click();
+    @Step("Confirmou que está na homepage")
+    public boolean isHomePage() {
+        return Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getHomePageURL());
     }
 }
