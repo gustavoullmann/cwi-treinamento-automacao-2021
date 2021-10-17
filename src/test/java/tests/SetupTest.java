@@ -1,17 +1,12 @@
 package tests;
 
 import io.qameta.allure.Feature;
-import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.*;
 import utils.Browser;
-import utils.Utils;
-
-import java.sql.SQLOutput;
 
 import static org.junit.Assert.*;
 
@@ -21,19 +16,19 @@ public class SetupTest extends BaseTests{
     @Test
     @Story("Carregar a homepage do site")
     public void testLoadHomePage() {
-        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getHomePageURL()));
-        System.out.println("Abrimos o navegador e carregamos a url da homepage!");
+        HomePage homePage = new HomePage();
+        assertTrue(homePage.isHomePage());
     }
 
     @Test
     @Story("Carregar a página de criação de cadastro")
-    public void testLoadAccountCreation() {
+    public void testLoadAccountCreationPage() {
         HomePage homePage = new HomePage();
         LoginPage loginPage = new LoginPage();
 
-        homePage.clickBtnLogin();
+        homePage.clickLoginButton();
         loginPage.fillAccountCreationEmail();
-        loginPage.createAnAccountClickButton();
+        loginPage.clickCreateAnAccountButton();
         WebDriverWait wait = new WebDriverWait(Browser.getCurrentDriver(), 10);
         wait.until(ExpectedConditions.urlContains("#account-creation"));
 
@@ -43,7 +38,7 @@ public class SetupTest extends BaseTests{
     @Test
     @Story("Preencher cadastro de novo usuário")
     public void testFillAccountCreationForm() {
-        testLoadAccountCreation();
+        testLoadAccountCreationPage();
         AccountCreationPage accountCreationPage = new AccountCreationPage();
 
         accountCreationPage.fillFirstName();
@@ -62,17 +57,17 @@ public class SetupTest extends BaseTests{
     @Test
     @Story("Realizar o login")
     public void testLogin() {
-        HomePage home = new HomePage();
-        LoginPage login = new LoginPage();
+        HomePage homePage = new HomePage();
+        LoginPage loginPage = new LoginPage();
 
-        home.clickBtnLogin();
+        homePage.clickLoginButton();
         WebDriverWait wait = new WebDriverWait(Browser.getCurrentDriver(), 10);
-        wait.until(ExpectedConditions.elementToBeClickable(login.submitLogin));
-        login.fillEmail();
-        login.fillPasswd();
-        login.clickBtnSubmitLogin();
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.submitLogin));
+        loginPage.fillEmail();
+        loginPage.fillPasswd();
+        loginPage.clickSubmitLoginButton();
 
-        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getLoggedUserPageURL()));
+        assertTrue(loginPage.isMyAccountPage());
     }
 
     @Test
@@ -87,23 +82,13 @@ public class SetupTest extends BaseTests{
         myAccountPage.clickSubmitSearchButton();
     }
 
-//    @Test
-//    @Story("Acessar Categoria")
-//    public void testAccessCategoryTShirts() {
-//        HomePage home = new HomePage();
-//        CategoryPage category = new CategoryPage();
-//
-//        home.clickCategoryTShirts();
-//        assertTrue(category.isPageTShirts());
-//    }
-
     @Test
     @Story("Adicionar página de Produto")
     public void testAddProductToProductPage() {
         testSearchProduct();
-        SearchPageResult searchPageResult = new SearchPageResult();
+        SearchResultPage searchResultPage = new SearchResultPage();
 
-        searchPageResult.clickProductAddToProductPage();
+        searchResultPage.clickProductAddToProductPage();
     }
 
     @Test
@@ -112,10 +97,10 @@ public class SetupTest extends BaseTests{
         testAddProductToProductPage();
         ProductPage productPage = new ProductPage();
 
-        productPage.ClickButtonAddToCart();
+        productPage.ClickAddToCartBUtton();
         WebDriverWait wait = new WebDriverWait(Browser.getCurrentDriver(), 10);
         wait.until(ExpectedConditions.elementToBeClickable(productPage.clearFix));
-        productPage.clickButtonModalProceedToCheckout();
+        productPage.clickModalProceedToCheckoutButton();
     }
 
     @Test
