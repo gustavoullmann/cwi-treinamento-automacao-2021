@@ -25,7 +25,7 @@ public class LoginPage extends LoginPageElementMapper {
     }
 
     @Step("Clicou em Sign In")
-    public void clickBtnSubmitLogin() {
+    public void clickSubmitLoginButton() {
         submitLogin.click();
     }
 
@@ -36,8 +36,13 @@ public class LoginPage extends LoginPageElementMapper {
     }
 
     @Step("Clicou em Create an account")
-    public void createAnAccountClickButton() {
+    public void clickCreateAnAccountButton() {
         createAnAccountButton.click();
+    }
+
+    @Step("Confirmou que está na página My Account")
+    public boolean isMyAccountPage() {
+        return Browser.getCurrentDriver().getCurrentUrl().contains((Utils.getLoggedUserPageURL()));
     }
 
     @Step("Confirmou que está na página de criação de cadastro")
