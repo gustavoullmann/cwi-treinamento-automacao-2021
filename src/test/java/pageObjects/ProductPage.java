@@ -16,12 +16,12 @@ public class ProductPage extends ProductPageElementMapper {
     }
 
     @Step("Clicou em Add to cart")
-    public void ClickButtonAddToCart() {
+    public void ClickAddToCartBUtton() {
         buttonAddToCart.click();
     }
 
     @Step("Clicou em Proceed to checkout")
-    public void clickButtonModalProceedToCheckout() {
+    public void clickModalProceedToCheckoutButton() {
         buttonModalProceedToCheckout.click();
     }
 }
