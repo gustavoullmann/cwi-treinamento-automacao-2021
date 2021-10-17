@@ -11,21 +11,21 @@ public class SearchPageResult extends SearchPageResultElementMapper {
         PageFactory.initElements(Browser.getCurrentDriver(), this);
     }
 
-    public String getTextNavigationPage(){
-        return navigationPage.getText();
-    }
-
-    public String getTextLighter(){
-        return lighter.getText();
-    }
-
-    public String getTextHeadingCounter(){
-        return headingCounter.getText();
-    }
-
-    public boolean isSearchPage(){
-        return getTextNavigationPage().equals("Search");
-    }
+//    public String getTextNavigationPage(){
+//        return navigationPage.getText();
+//    }
+//
+//    public String getTextLighter(){
+//        return lighter.getText();
+//    }
+//
+//    public String getTextHeadingCounter(){
+//        return headingCounter.getText();
+//    }
+//
+//    public boolean isSearchPage(){
+//        return getTextNavigationPage().equals("Search");
+//    }
 
     @Step("Realizou Mouse Over sobre o produto e clicou em More")
     public void clickProductAddToProductPage() {
